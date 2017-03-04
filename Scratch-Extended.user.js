@@ -15,9 +15,9 @@ window.scratchExtended = function() {
         return;
     }
 
-    ScratchBlocks.Categories.mod = new Object();
+    ScratchBlocks.Categories.mod = {};
 
-    ScratchBlocks.Colours.mod = new Object();
+    ScratchBlocks.Colours.mod = {};
 
     ScratchBlocks.Colours.mod.primary = "#C0C0C0";
 

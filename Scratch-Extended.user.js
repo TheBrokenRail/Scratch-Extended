@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Scratch Extended
 // @namespace    http://tampermonkey.net/
-// @version      1.0.1
+// @version      1.0.2
 // @run-at       document-end
 // @match        *://*/*
 // @grant        none
@@ -277,7 +277,7 @@ window.scratchExtended = function() {
                 '</value>'+
                 '<value name="TO">'+
                     '<shadow type="text">'+
-                        '<field name="TEXT"></field>'+
+                        '<field name="TEXT">0</field>'+
                     '</shadow>'+
                 '</value>'+
             '</block>'+
@@ -289,7 +289,7 @@ window.scratchExtended = function() {
                 '</value>'+
                 '<value name="BY">'+
                     '<shadow type="math_number">'+
-                        '<field name="NUM">0</field>'+
+                        '<field name="NUM">1</field>'+
                     '</shadow>'+
                 '</value>'+
             '</block>'+

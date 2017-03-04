@@ -5,6 +5,7 @@
 // @run-at       document-end
 // @match        *://*/*
 // @grant        none
+// @auther       TheBrokenRail
 // ==/UserScript==
 
 window.scratchExtended = function() {

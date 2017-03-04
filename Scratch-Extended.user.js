@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Scratch Extended
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      1.0
 // @run-at       document-end
 // @match        *://*/*
 // @grant        none

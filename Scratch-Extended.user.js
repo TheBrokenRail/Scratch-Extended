@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Scratch Extended
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.0.1
 // @run-at       document-end
 // @match        *://*/*
 // @grant        none
@@ -11,7 +11,8 @@
 window.scratchExtended = function() {
     var ScratchBlocks = ScratchBlocks || Blockly;
     var vm = window.vm;
-    if (!ScratchBlocks || !vm || !ScratchBlocks.Blocks) {
+
+    if (!ScratchBlocks || !ScratchBlocks.Blocks) {
         return;
     }
 
@@ -297,99 +298,106 @@ window.scratchExtended = function() {
             '<block type="mod_false"></block>'+
         '</category>';
 
-    vm.runtime._primitives.mod_get_variable_by_name = function (args, util) {
-        var variable = util.target.lookupOrCreateVariable(args.VARIABLE);
-        return variable.value;
-    };
+    if (vm) {
+        vm.runtime._primitives.mod_get_variable_by_name = function (args, util) {
+            var variable = util.target.lookupOrCreateVariable(args.VARIABLE);
+            return variable.value;
+        };
 
-    vm.runtime._primitives.mod_rgba = function (args, util) {
-        args.R = Math.round(args.R);
-        args.G = Math.round(args.G);
-        args.B = Math.round(args.B);
-        args.A = Math.round(args.A);
-        return (args.A * 16777216) + (args.R * 65536) + (args.G * 255) + args.B;
-    };
+        vm.runtime._primitives.mod_rgba = function (args, util) {
+            args.R = Math.round(args.R);
+            args.G = Math.round(args.G);
+            args.B = Math.round(args.B);
+            args.A = Math.round(args.A);
+            return (args.A * 16777216) + (args.R * 65536) + (args.G * 255) + args.B;
+        };
 
-    vm.runtime._primitives.mod_pen_hue = function (args, util) {
-        var penState = util.target.getCustomState('Scratch.pen');
-        if (!penState) {
-            return 120;
-        }
-        return penState.hue;
-    };
-
-    vm.runtime._primitives.mod_pen_shade = function (args, util) {
-        var penState = util.target.getCustomState('Scratch.pen');
-        if (!penState) {
-            return 50;
-        }
-        return penState.shade;
-    };
-
-    vm.runtime._primitives.mod_pen_size = function (args, util) {
-        var penState = util.target.getCustomState('Scratch.pen');
-        if (!penState) {
-            return 1;
-        }
-        return penState.penAttributes.diameter;
-    };
-
-    vm.runtime._primitives.mod_set_variable_by_name = function (args, util) {
-        var variable = util.target.lookupOrCreateVariable(args.VARIABLE);
-        variable.value = args.TO;
-    };
-
-    vm.runtime._primitives.mod_change_variable_by_name = function (args, util) {
-        function toNumber(value) {
-            var n = Number(value);
-            if (isNaN(n)) {
-                // Scratch treats NaN as 0, when needed as a number.
-                // E.g., 0 + NaN -> 0.
-                return 0;
+        vm.runtime._primitives.mod_pen_hue = function (args, util) {
+            var penState = util.target.getCustomState('Scratch.pen');
+            if (!penState) {
+                return 120;
             }
-            return n;
-        }
-        var variable = util.target.lookupOrCreateVariable(args.VARIABLE);
-        var castedValue = toNumber(variable.value);
-        var dValue = toNumber(args.BY);
-        variable.value = castedValue + dValue;
-    };
+            return penState.hue;
+        };
 
-    vm.runtime._primitives.mod_while = function (args, util) {
-        function toBoolean(value) {
-            // Already a boolean?
-            if (typeof value === 'boolean') {
-                return value;
+        vm.runtime._primitives.mod_pen_shade = function (args, util) {
+            var penState = util.target.getCustomState('Scratch.pen');
+            if (!penState) {
+                return 50;
             }
-            if (typeof value === 'string') {
-                // These specific strings are treated as false in Scratch.
-                if ((value === '') ||
-                    (value === '0') ||
-                    (value.toLowerCase() === 'false')) {
-                    return false;
+            return penState.shade;
+        };
+
+        vm.runtime._primitives.mod_pen_size = function (args, util) {
+            var penState = util.target.getCustomState('Scratch.pen');
+            if (!penState) {
+                return 1;
+            }
+            return penState.penAttributes.diameter;
+        };
+
+        vm.runtime._primitives.mod_set_variable_by_name = function (args, util) {
+            var variable = util.target.lookupOrCreateVariable(args.VARIABLE);
+            variable.value = args.TO;
+        };
+
+        vm.runtime._primitives.mod_change_variable_by_name = function (args, util) {
+            function toNumber(value) {
+                var n = Number(value);
+                if (isNaN(n)) {
+                    // Scratch treats NaN as 0, when needed as a number.
+                    // E.g., 0 + NaN -> 0.
+                    return 0;
                 }
-                // All other strings treated as true.
-                return true;
+                return n;
             }
-            // Coerce other values and numbers.
-            return Boolean(value);
-        }
-        var condition = toBoolean(args.CONDITION);
-        // If the condition is true, start the branch.
-        if (condition) {
-            util.startBranch(1, true);
-        }
-    };
+            var variable = util.target.lookupOrCreateVariable(args.VARIABLE);
+            var castedValue = toNumber(variable.value);
+            var dValue = toNumber(args.BY);
+            variable.value = castedValue + dValue;
+        };
 
-    vm.runtime._primitives.mod_true = function (args, util) {
-        return true;
-    };
+        vm.runtime._primitives.mod_while = function (args, util) {
+            function toBoolean(value) {
+                // Already a boolean?
+                if (typeof value === 'boolean') {
+                    return value;
+                }
+                if (typeof value === 'string') {
+                    // These specific strings are treated as false in Scratch.
+                    if ((value === '') ||
+                        (value === '0') ||
+                        (value.toLowerCase() === 'false')) {
+                        return false;
+                    }
+                    // All other strings treated as true.
+                    return true;
+                }
+                // Coerce other values and numbers.
+                return Boolean(value);
+            }
+            var condition = toBoolean(args.CONDITION);
+            // If the condition is true, start the branch.
+            if (condition) {
+                util.startBranch(1, true);
+            }
+        };
 
-    vm.runtime._primitives.mod_false = function (args, util) {
-        return false;
-    };
+        vm.runtime._primitives.mod_true = function (args, util) {
+            return true;
+        };
 
-    var toolbox = vm.filterToolbox(dom.documentElement);
+        vm.runtime._primitives.mod_false = function (args, util) {
+            return false;
+        };
+    }
+
+    var toolbox = null;
+    if (vm) {
+        toolbox = vm.filterToolbox(dom.documentElement);
+    } else {
+        toolbox = dom.documentElement;
+    }
     ScratchBlocks.getMainWorkspace().updateToolbox(toolbox);
 };
 

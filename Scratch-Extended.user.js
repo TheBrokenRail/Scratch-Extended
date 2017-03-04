@@ -208,8 +208,8 @@ window.scratchExtended = function() {
                 "colour": ScratchBlocks.Colours.mod.primary,
                 "colourSecondary": ScratchBlocks.Colours.mod.secondary,
                 "colourTertiary": ScratchBlocks.Colours.mod.tertiary,
-                "output": "String",
-                "outputShape": ScratchBlocks.OUTPUT_SHAPE_ROUND,
+                "output": "Boolean",
+                "outputShape": ScratchBlocks.OUTPUT_SHAPE_HEXAGONAL,
                 "checkboxInFlyout": false
             });
         }
@@ -223,8 +223,8 @@ window.scratchExtended = function() {
                 "colour": ScratchBlocks.Colours.mod.primary,
                 "colourSecondary": ScratchBlocks.Colours.mod.secondary,
                 "colourTertiary": ScratchBlocks.Colours.mod.tertiary,
-                "output": "String",
-                "outputShape": ScratchBlocks.OUTPUT_SHAPE_ROUND,
+                "output": "Boolean",
+                "outputShape": ScratchBlocks.OUTPUT_SHAPE_HEXAGONAL,
                 "checkboxInFlyout": false
             });
         }
@@ -235,65 +235,65 @@ window.scratchExtended = function() {
 
     dom.documentElement.innerHTML = dom.documentElement.innerHTML +
         '<category name="Scratch+" colour="#D3D3D3" secondaryColour="#C0C0C0">'+
-        '<block type="mod_get_variable_by_name">'+
-        '<value name="VARIABLE">'+
-        '<shadow type="text">'+
-        '<field name="TEXT"></field>'+
-        '</shadow>'+
-        '</value>'+
-        '</block>'+
-        '<block type="mod_rgba">'+
-        '<value name="R">'+
-        '<shadow type="text">'+
-        '<field name="TEXT"></field>'+
-        '</shadow>'+
-        '</value>'+
-        '<value name="G">'+
-        '<shadow type="text">'+
-        '<field name="TEXT"></field>'+
-        '</shadow>'+
-        '</value>'+
-        '<value name="B">'+
-        '<shadow type="text">'+
-        '<field name="TEXT"></field>'+
-        '</shadow>'+
-        '</value>'+
-        '<value name="A">'+
-        '<shadow type="text">'+
-        '<field name="TEXT"></field>'+
-        '</shadow>'+
-        '</value>'+
-        '</block>'+
-        '<block type="mod_pen_hue"></block>'+
-        '<block type="mod_pen_shade"></block>'+
-        '<block type="mod_pen_size"></block>'+
-        '<block type="mod_set_variable_by_name">'+
-        '<value name="VARIABLE">'+
-        '<shadow type="text">'+
-        '<field name="TEXT"></field>'+
-        '</shadow>'+
-        '</value>'+
-        '<value name="TO">'+
-        '<shadow type="text">'+
-        '<field name="TEXT"></field>'+
-        '</shadow>'+
-        '</value>'+
-        '</block>'+
-        '<block type="mod_change_variable_by_name">'+
-        '<value name="VARIABLE">'+
-        '<shadow type="text">'+
-        '<field name="TEXT"></field>'+
-        '</shadow>'+
-        '</value>'+
-        '<value name="BY">'+
-        '<shadow type="math_number">'+
-        '<field name="NUM">0</field>'+
-        '</shadow>'+
-        '</value>'+
-        '</block>'+
-        '<block type="mod_while"></block>'+
-        '<block type="mod_true"></block>'+
-        '<block type="mod_false"></block>'+
+            '<block type="mod_get_variable_by_name">'+
+                '<value name="VARIABLE">'+
+                    '<shadow type="text">'+
+                        '<field name="TEXT"></field>'+
+                    '</shadow>'+
+                '</value>'+
+            '</block>'+
+            '<block type="mod_rgba">'+
+                '<value name="R">'+
+                    '<shadow type="text">'+
+                        '<field name="TEXT"></field>'+
+                    '</shadow>'+
+                '</value>'+
+                '<value name="G">'+
+                    '<shadow type="text">'+
+                        '<field name="TEXT"></field>'+
+                    '</shadow>'+
+                '</value>'+
+                '<value name="B">'+
+                    '<shadow type="text">'+
+                        '<field name="TEXT"></field>'+
+                    '</shadow>'+
+                '</value>'+
+                '<value name="A">'+
+                    '<shadow type="text">'+
+                        '<field name="TEXT"></field>'+
+                    '</shadow>'+
+                '</value>'+
+            '</block>'+
+            '<block type="mod_pen_hue"></block>'+
+            '<block type="mod_pen_shade"></block>'+
+            '<block type="mod_pen_size"></block>'+
+            '<block type="mod_set_variable_by_name">'+
+                '<value name="VARIABLE">'+
+                    '<shadow type="text">'+
+                        '<field name="TEXT"></field>'+
+                    '</shadow>'+
+                '</value>'+
+                '<value name="TO">'+
+                    '<shadow type="text">'+
+                        '<field name="TEXT"></field>'+
+                    '</shadow>'+
+                '</value>'+
+            '</block>'+
+            '<block type="mod_change_variable_by_name">'+
+                '<value name="VARIABLE">'+
+                    '<shadow type="text">'+
+                        '<field name="TEXT"></field>'+
+                    '</shadow>'+
+                '</value>'+
+                '<value name="BY">'+
+                    '<shadow type="math_number">'+
+                        '<field name="NUM">0</field>'+
+                    '</shadow>'+
+                '</value>'+
+            '</block>'+
+            '<block type="mod_while"></block>'+
+            '<block type="mod_true"></block>'+
+            '<block type="mod_false"></block>'+
         '</category>';
 
     vm.runtime._primitives.mod_get_variable_by_name = function (args, util) {

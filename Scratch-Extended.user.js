@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Scratch Extended
 // @namespace    http://tampermonkey.net/
-// @version      1.0.6
+// @version      1.0.7
 // @run-at       document-end
 // @match        *://*/*
 // @grant        none
@@ -9,7 +9,8 @@
 // ==/UserScript==
 
 window.scratchExtended = function() {
-    var ScratchBlocks = (ScratchBlocks || null) || (Blockly || null);
+    var Blockly = Blockly || null;
+    var ScratchBlocks = ScratchBlocks || Blockly;
     var vm = window.vm;
 
     if (!ScratchBlocks || !ScratchBlocks.Blocks) {

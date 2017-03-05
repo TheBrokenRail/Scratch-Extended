@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Scratch Extended
 // @namespace    http://tampermonkey.net/
-// @version      1.0.8
+// @version      1.0.9
 // @run-at       document-end
 // @match        *://*/*
 // @grant        none
@@ -305,6 +305,10 @@ window.scratchExtended = function() {
             '<block type="mod_true"></block>'+
             '<block type="mod_false"></block>'+
         '</category>';
+
+    var div = document.createElement("DIV");
+    div.appendChild(dom.documentElement);
+    ScratchBlocks.Blocks.defaultToolbox = div.innerHTML;
 
     if (vm) {
         vm.runtime._primitives.mod_get_variable_by_name = function (args, util) {

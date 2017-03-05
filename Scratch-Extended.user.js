@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Scratch Extended
 // @namespace    http://tampermonkey.net/
-// @version      1.0.2
+// @version      1.0.3
 // @run-at       document-end
 // @match        *://*/*
 // @grant        none
@@ -16,7 +16,7 @@ window.scratchExtended = function() {
         return;
     }
 
-    ScratchBlocks.Categories.mod = {};
+    ScratchBlocks.Categories.mod = "mod";
 
     ScratchBlocks.Colours.mod = {};
 

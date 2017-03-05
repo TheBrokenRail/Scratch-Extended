@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Scratch Extended
 // @namespace    http://tampermonkey.net/
-// @version      1.0.9
+// @version      1.1
 // @run-at       document-end
 // @match        *://*/*
 // @grant        none
@@ -307,7 +307,7 @@ window.scratchExtended = function() {
         '</category>';
 
     var div = document.createElement("DIV");
-    div.appendChild(dom.documentElement);
+    div.appendChild(dom.documentElement.cloneNode(true));
     ScratchBlocks.Blocks.defaultToolbox = div.innerHTML;
 
     if (vm) {

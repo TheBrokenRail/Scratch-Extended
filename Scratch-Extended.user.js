@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Scratch Extended
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
+// @version      1.1.2
 // @run-at       document-end
 // @match        *://*/*
 // @grant        none
@@ -404,13 +404,7 @@ window.scratchExtended = function() {
         };
     }
 
-    var toolbox = null;
-    if (vm) {
-        toolbox = vm.filterToolbox(dom.documentElement);
-    } else {
-        toolbox = dom.documentElement;
-    }
-    ScratchBlocks.getMainWorkspace().updateToolbox(toolbox);
+    ScratchBlocks.getMainWorkspace().updateToolbox(dom.documentElement);
 };
 
 (function () {
